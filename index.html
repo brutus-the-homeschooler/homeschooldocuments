@@ -5,19 +5,32 @@
   <style>
     body {
       font-family: system-ui, sans-serif;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      line-height: 1.5;
+      max-width: 8.5in;   /* letter size width */
+      margin: 1in auto;
+      padding: 0;
+      line-height: 1.4;
     }
-    /* Sizes */
-    #subject { height: 1.5rem; }            /* one line */
-    #overview { min-height: 3em; }          /* ~2–3 lines */
-    #sequence { min-height: 15em; }         /* bulk area */
-    #materials { min-height: 6em; }         /* medium list area */
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 0.5rem;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.4rem;
+      font-size: 1rem;
+      margin-top: 0.15rem;
+      box-sizing: border-box;
+      resize: none;            /* no drag resize */
+    }
+    /* Field sizes */
+    #subject   { height: 1.5rem; }   /* one line */
+    #overview  { height: 3rem; }     /* ~2–3 lines */
+    #sequence  { height: 12rem; }    /* bulk area */
+    #materials { height: 5rem; }     /* medium area */
     button {
-      margin-top: 2rem;
-      padding: 0.75rem 1.25rem;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
       border: none;
       border-radius: 6px;
       background: #2563eb;
@@ -28,30 +41,51 @@
     button:hover { background: #1e40af; }
     @media print {
       button { display: none; }
-      textarea, input, select { border: none; resize: none; }
+      input, textarea, select {
+        border: none;
+        resize: none;
+        overflow: visible;
+      }
+      label { margin-top: 0.25rem; }
+      body { margin: 0.5in; }
     }
+    /* Prevent fields from splitting across pages */
+    .field-block { page-break-inside: avoid; }
   </style>
 </head>
 <body>
-<label for="student">Student Name</label>
-<select id="student">
-  <option value="">-- Select a Student --</option>
-</select>
 
-<label for="studentId">Student Application ID #</label>
-<input type="text" id="studentId" readonly>
+<div class="field-block">
+  <label for="student">Student Name</label>
+  <select id="student">
+    <option value="">-- Select a Student --</option>
+  </select>
+</div>
 
-<label for="subject">Subject</label>
-<input type="text" id="subject" placeholder="e.g. Math">
+<div class="field-block">
+  <label for="studentId">Student Application ID #</label>
+  <input type="text" id="studentId" readonly>
+</div>
 
-<label for="overview">Scope / Overview of Class</label>
-<textarea id="overview" placeholder="Brief 2–3 line summary..."></textarea>
+<div class="field-block">
+  <label for="subject">Subject</label>
+  <input type="text" id="subject" placeholder="e.g. Math">
+</div>
 
-<label for="sequence">Sequence / Method of Teaching / Lessons</label>
-<textarea id="sequence" placeholder="Detailed lesson plan, steps, activities..."></textarea>
+<div class="field-block">
+  <label for="overview">Scope / Overview of Class</label>
+  <textarea id="overview" placeholder="Brief 2–3 line summary..."></textarea>
+</div>
 
-<label for="materials">Materials Needed</label>
-<textarea id="materials" placeholder="List resources, books, supplies..."></textarea>
+<div class="field-block">
+  <label for="sequence">Sequence / Method of Teaching / Lessons</label>
+  <textarea id="sequence" placeholder="Detailed lesson plan, steps, activities..."></textarea>
+</div>
+
+<div class="field-block">
+  <label for="materials">Materials Needed</label>
+  <textarea id="materials" placeholder="List resources, books, supplies..."></textarea>
+</div>
 
 <button onclick="window.print()">Print / Save to PDF</button>
 
